@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A5DBE88-EA1E-4123-92BD-1721ACB33595}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		InsertData.sql = InsertData.sql
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8ACF531F-6603-4467-BE86-538F0FAAA80F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Persistence", "MunicipalityTaxApp3\src\MunicipalityTax.Persistence\MunicipalityTax.Persistence.csproj", "{C686E115-D148-4A54-A73D-8DE21FD3433A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Services", "MunicipalityTaxApp3\src\MunicipalityTax.Services\MunicipalityTax.Services.csproj", "{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.WebApi", "MunicipalityTaxApp3\src\MunicipalityTax.WebApi\MunicipalityTax.WebApi.csproj", "{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Services.Tests", "MunicipalityTaxApp3\tst\MunicipalityTax.Services.Tests\MunicipalityTax.Services.Tests.csproj", "{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.WebApi.Tests", "MunicipalityTaxApp3\tst\MunicipalityTax.WebApi.Tests\MunicipalityTax.WebApi.Tests.csproj", "{2A7E97F4-883C-424E-B889-D55C7B59F8C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Contracts", "MunicipalityTaxApp3\src\MunicipalityTax.Contracts\MunicipalityTax.Contracts.csproj", "{B7A35CDB-B73F-46DB-A641-CC25F5CABFBA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Domain", "MunicipalityTaxApp3\src\MunicipalityTax.Domain\MunicipalityTax.Domain.csproj", "{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C686E115-D148-4A54-A73D-8DE21FD3433A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C686E115-D148-4A54-A73D-8DE21FD3433A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C686E115-D148-4A54-A73D-8DE21FD3433A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C686E115-D148-4A54-A73D-8DE21FD3433A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A7E97F4-883C-424E-B889-D55C7B59F8C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A7E97F4-883C-424E-B889-D55C7B59F8C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A7E97F4-883C-424E-B889-D55C7B59F8C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A7E97F4-883C-424E-B889-D55C7B59F8C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A35CDB-B73F-46DB-A641-CC25F5CABFBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A35CDB-B73F-46DB-A641-CC25F5CABFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A35CDB-B73F-46DB-A641-CC25F5CABFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A35CDB-B73F-46DB-A641-CC25F5CABFBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8} = {8ACF531F-6603-4467-BE86-538F0FAAA80F}
+		{2A7E97F4-883C-424E-B889-D55C7B59F8C2} = {8ACF531F-6603-4467-BE86-538F0FAAA80F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4A8C2B8-CC8C-4EDE-BE63-1946A654438C}
+	EndGlobalSection
+EndGlobal

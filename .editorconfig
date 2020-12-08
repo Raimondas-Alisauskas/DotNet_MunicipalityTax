@@ -1,0 +1,30 @@
+# NOTE: Requires **VS2019 16.3** or later
+
+# Housing Nordics general code standard rules for test projects.
+# Description: Use this rule set in all test projects. 
+# Note: the solution root folder should contain the base .editorconfig file otherwise only rules specified in this file will be customized
+
+# Code files
+[*.{cs,vb}]
+
+#StyleCop.Analyzers
+# Elements should appear in the correct order
+dotnet_diagnostic.SA1201.severity = none
+
+# Elements should be ordered by access
+dotnet_diagnostic.SA1202.severity = none
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = suggestion
+
+# SA1633: File should have header
+dotnet_diagnostic.SA1633.severity = suggestion
+
+# S125: Sections of code should not be commented out
+dotnet_diagnostic.S125.severity = suggestion
+
+# SA1601: Partial elements should be documented
+dotnet_diagnostic.SA1601.severity = suggestion
+
+# SA1602: Enumeration items should be documented
+dotnet_diagnostic.SA1602.severity = suggestion
