@@ -1,13 +1,15 @@
 ﻿namespace MunicipalityTax.WebApi.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using MunicipalityTax.Contracts.In;
     using MunicipalityTax.Services.Services;
 
+    /// <summary>
+    /// CRUD operations on municipalities.
+    /// </summary>
     [Consumes("application/json", "text/xml")]
     [Produces("application/json", "text/xml")]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -25,6 +27,11 @@
         // todo: add cash
         // todo: 304: Not Modified if GET request result can be cached
 
+        /// <summary>Gets all municipalities.</summary>
+        /// <param name="request">Request parameters.</param>
+        /// <returns>Municipalities data.</returns>
+        /// <response code="200">If request completed.</response>
+        /// <response code="400">If request provided is wrong.</response>
         // GET api/v1/Municipalities
         [HttpHead]
         [HttpGet]
@@ -44,14 +51,19 @@
             return this.Ok(items);
         }
 
+        /// <summary>Gets municipality.</summary>
+        /// <param name="municipalityId">Municipality id.</param>
+        /// <returns>Municipality data.</returns>
+        /// <response code="200">If request completed.</response>
+        /// <response code="404">If municipality doesn't exists.</response>
         // GET api/v1/Municipalities/5
-        [HttpGet("{id}")]
+        [HttpGet("{municipalityId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Read(Guid id)
+        public IActionResult Read(Guid municipalityId)
         {
-            var item = this.service.Read(id);
+            var item = this.service.Read(municipalityId);
 
             if (item == null)
             {
@@ -61,6 +73,19 @@
             return this.Ok(item);
         }
 
+        /// <summary>Adds municipality to database.</summary>
+        /// <remarks>
+        /// Sample request body:
+        ///
+        ///     {
+        ///         "municipalityName": "TestMunicipality"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="body">Request body.</param>
+        /// <returns>Created data id.</returns>
+        /// <response code="201">Returns if data sucessfuly added to database.</response>
+        /// <response code="400">If data provided is wrong.</response>
         // POST api/v1/Municipalities/
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -85,51 +110,59 @@
             return this.Created($"api/Municipalities/{id}", id);
         }
 
+        /// <summary>Changes existing municipality data.</summary>
+        /// <remarks>
+        /// Sample request body:
+        ///
+        ///     {
+        ///         "municipalityName": "TestMunicipality"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="municipalityId">Municipality id.</param>
+        /// <param name="body">Request body.</param>
+        /// <returns>Created body.</returns>
+        /// <response code="204">Returns if data sucessfuly changed.</response>
+        /// <response code="400">If data provided is wrong.</response>
         // PUT api/v1/Municipalities/5
-        [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(StatusCodes.Status304NotModified)]
+        [HttpPut("{municipalityId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status412PreconditionFailed)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Update(Guid id, [FromBody] MunicipalityCreateDto body)
+        public IActionResult Update(Guid municipalityId, [FromBody] MunicipalityCreateDto body)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest();
             }
 
-            int retVal = this.service.Update(id, body);
+            int retVal = this.service.Update(municipalityId, body);
             if (retVal == 0)
             {
-                return this.StatusCode(304, "Not Modified");
-            }
-            else if (retVal == -1)
-            {
-                return this.StatusCode(412, "DbUpdateConcurrencyException");
+                return this.BadRequest($"No entities found to update");
             }
             else
             {
-                return this.Accepted(body);
+                return this.NoContent();
             }
         }
 
+        /// <summary>Deletes existing municipality.</summary>
+        /// <param name="municipalityId">Municipality id.</param>
+        /// <returns>No content.</returns>
+        /// <response code="204">Returns if request successful.</response>
+        /// <response code="404">If data provided is wrong.</response>
         // DELETE api/v1/<Municipalities>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{municipalityId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status412PreconditionFailed)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(Guid municipalityId)
         {
-            int retVal = this.service.Delete(id);
+            int retVal = this.service.Delete(municipalityId);
             if (retVal == 0)
             {
                 return this.NotFound();
-            }
-            else if (retVal == -1)
-            {
-                return this.StatusCode(412, "DbUpdateConcurrencyException");
             }
             else
             {

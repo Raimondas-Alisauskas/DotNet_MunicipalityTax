@@ -22,6 +22,7 @@ CREATE TABLE [TaxSchedule] (
     [Id] uniqueidentifier NOT NULL,
     [ScheduleType] int NOT NULL,
     [TaxStartDate] datetime2 NOT NULL,
+    [TaxEndDate] datetime2 NOT NULL,
     [Tax] decimal(18,2) NOT NULL,
     [MunicipalityId] uniqueidentifier NOT NULL,
     CONSTRAINT [PK_TaxSchedule] PRIMARY KEY ([Id]),
@@ -37,14 +38,15 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Muni
     SET IDENTITY_INSERT [Municipality] OFF;
 GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'MunicipalityId', N'ScheduleType', N'Tax', N'TaxStartDate') AND [object_id] = OBJECT_ID(N'[TaxSchedule]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'MunicipalityId', N'ScheduleType', N'Tax', N'TaxEndDate', N'TaxStartDate') AND [object_id] = OBJECT_ID(N'[TaxSchedule]'))
     SET IDENTITY_INSERT [TaxSchedule] ON;
-INSERT INTO [TaxSchedule] ([Id], [MunicipalityId], [ScheduleType], [Tax], [TaxStartDate])
-VALUES ('7ebced2b-e2f9-45e0-bf75-111111111111', '7ebced2b-e2f9-45e0-bf75-111111111100', 0, 0.1, '2016-01-01T00:00:00.0000000'),
-('7ebced2b-e2f9-45e0-bf75-111111111112', '7ebced2b-e2f9-45e0-bf75-111111111100', 1, 0.2, '2015-12-28T00:00:00.0000000'),
-('7ebced2b-e2f9-45e0-bf75-111111111113', '7ebced2b-e2f9-45e0-bf75-111111111100', 2, 0.3, '2016-01-01T00:00:00.0000000'),
-('7ebced2b-e2f9-45e0-bf75-111111111114', '7ebced2b-e2f9-45e0-bf75-111111111100', 3, 0.4, '2016-01-01T00:00:00.0000000');
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'MunicipalityId', N'ScheduleType', N'Tax', N'TaxStartDate') AND [object_id] = OBJECT_ID(N'[TaxSchedule]'))
+INSERT INTO [TaxSchedule] ([Id], [MunicipalityId], [ScheduleType], [Tax], [TaxEndDate], [TaxStartDate])
+VALUES ('7ebced2b-e2f9-45e0-bf75-111111111113', '7ebced2b-e2f9-45e0-bf75-111111111100', 0, 0.1, '2016-01-01T00:00:00.0000000', '2016-01-01T00:00:00.0000000'),
+('7ebced2b-e2f9-45e0-bf75-111111111111', '7ebced2b-e2f9-45e0-bf75-111111111100', 1, 0.2, '2016-01-03T00:00:00.0000000', '2015-12-28T00:00:00.0000000'),
+('7ebced2b-e2f9-45e0-bf75-111111111112', '7ebced2b-e2f9-45e0-bf75-111111111100', 2, 0.3, '2016-01-31T00:00:00.0000000', '2016-01-01T00:00:00.0000000'),
+('7ebced2b-e2f9-45e0-bf75-111111111114', '7ebced2b-e2f9-45e0-bf75-111111111100', 3, 0.4, '2016-12-31T00:00:00.0000000', '2016-01-01T00:00:00.0000000'),
+('7ebced2b-e2f9-45e0-bf75-111111111115', '7ebced2b-e2f9-45e0-bf75-111111111100', 2, 0.5, '2016-02-29T00:00:00.0000000', '2016-02-01T00:00:00.0000000');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'MunicipalityId', N'ScheduleType', N'Tax', N'TaxEndDate', N'TaxStartDate') AND [object_id] = OBJECT_ID(N'[TaxSchedule]'))
     SET IDENTITY_INSERT [TaxSchedule] OFF;
 GO
 
@@ -52,7 +54,7 @@ CREATE INDEX [IX_TaxSchedule_MunicipalityId] ON [TaxSchedule] ([MunicipalityId])
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20201205092755_InitialWithData', N'5.0.0');
+VALUES (N'20201222215556_InitialCreateWithData', N'5.0.0');
 GO
 
 COMMIT;

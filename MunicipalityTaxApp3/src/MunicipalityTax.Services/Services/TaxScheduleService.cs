@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Dynamic;
     using System.Linq;
-    using System.Linq.Dynamic.Core;
-    using System.Text;
     using AutoMapper;
     using MunicipalityTax.Contracts.In;
     using MunicipalityTax.Domain.Entities;
@@ -43,7 +41,7 @@
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var entities = this.repository.ReadAll() as IQueryable<TaxSchedule>;
+            var entities = this.repository.ReadAll();
 
             if (!string.IsNullOrWhiteSpace(request.Id))
             {
@@ -66,31 +64,35 @@
 
             if (!string.IsNullOrWhiteSpace(request.OrderBy))
             {
-                var ordering = new StringBuilder();
                 var orderByArray = request.OrderBy.Split(',');
 
                 foreach (var req in orderByArray)
                 {
                     var trimmedRequest = req.Trim();
-                    var isOrderDescending = trimmedRequest.EndsWith(" desc");
-
-                    var indexOfFirstSpace = trimmedRequest.IndexOf(" ");
-                    var propertyName = indexOfFirstSpace == -1 ?
-                        trimmedRequest : trimmedRequest.Remove(indexOfFirstSpace);
-
-                    ordering
-                        .Append(ordering.Length == 0 ? string.Empty : ", ")
-                        .Append(propertyName)
-                        .Append(isOrderDescending ? " descending" : " ascending");
+                    entities = entities.OrderByProp(trimmedRequest);
                 }
-
-                entities = entities.OrderBy(ordering.ToString());
             }
 
-            var page = entities.Page(request.PageNumber, request.PageSize);
+            var page = PagingHelper<TaxSchedule>.MakePage(entities, request.PageNumber, request.PageSize);
 
             return this.mapper.Map<IEnumerable<TaxScheduleDto>>(source: page)
                 .ReturnFieldsOnly(request.Fields);
+        }
+
+        public IEnumerable<Guid> CreateAllSchedules(IEnumerable<TaxScheduleCreateDto> body)
+        {
+            var entities = body.MapToEntities();
+            this.repository.CreateAll(entities);
+            this.repository.Save();
+
+            return entities.Select(e => e.Id);
+        }
+
+        public int UpdateSchedule(Guid id, TaxScheduleCreateDto dto)
+        {
+            var entity = dto.MapToEntity();
+            this.repository.Update(id, entity);
+            return this.repository.Save();
         }
     }
 }

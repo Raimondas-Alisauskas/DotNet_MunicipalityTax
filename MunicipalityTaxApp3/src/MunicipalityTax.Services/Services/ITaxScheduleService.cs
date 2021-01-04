@@ -13,5 +13,9 @@
         IEnumerable<TaxScheduleDto> ReadAllByMunicipalityId(Guid municipalityId);
 
         IEnumerable<ExpandoObject> ReadWithParameters(TaxScheduleRequest request);
+
+        IEnumerable<Guid> CreateAllSchedules(IEnumerable<TaxScheduleCreateDto> body);
+
+        int UpdateSchedule(Guid id, TaxScheduleCreateDto dto);
     }
 }

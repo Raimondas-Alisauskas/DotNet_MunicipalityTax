@@ -10,8 +10,8 @@ using MunicipalityTax.Persistence.DbContexts;
 namespace MunicipalityTax.Persistence.Migrations
 {
     [DbContext(typeof(MtxDbContext))]
-    [Migration("20201205092755_InitialWithData")]
-    partial class InitialWithData
+    [Migration("20201222215556_InitialCreateWithData")]
+    partial class InitialCreateWithData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace MunicipalityTax.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("MunicipalityTax.Domain.Entities.MunicipalityEntity", b =>
+            modelBuilder.Entity("MunicipalityTax.Domain.Entities.Municipality", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace MunicipalityTax.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MunicipalityTax.Domain.Entities.TaxScheduleEntity", b =>
+            modelBuilder.Entity("MunicipalityTax.Domain.Entities.TaxSchedule", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,6 +58,9 @@ namespace MunicipalityTax.Persistence.Migrations
                     b.Property<decimal>("Tax")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("TaxEndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("TaxStartDate")
                         .HasColumnType("datetime2");
 
@@ -70,26 +73,29 @@ namespace MunicipalityTax.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7ebced2b-e2f9-45e0-bf75-111111111111"),
+                            Id = new Guid("7ebced2b-e2f9-45e0-bf75-111111111113"),
                             MunicipalityId = new Guid("7ebced2b-e2f9-45e0-bf75-111111111100"),
                             ScheduleType = 0,
                             Tax = 0.1m,
+                            TaxEndDate = new DateTime(2016, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TaxStartDate = new DateTime(2016, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("7ebced2b-e2f9-45e0-bf75-111111111111"),
+                            MunicipalityId = new Guid("7ebced2b-e2f9-45e0-bf75-111111111100"),
+                            ScheduleType = 1,
+                            Tax = 0.2m,
+                            TaxEndDate = new DateTime(2016, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TaxStartDate = new DateTime(2015, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = new Guid("7ebced2b-e2f9-45e0-bf75-111111111112"),
                             MunicipalityId = new Guid("7ebced2b-e2f9-45e0-bf75-111111111100"),
-                            ScheduleType = 1,
-                            Tax = 0.2m,
-                            TaxStartDate = new DateTime(2015, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("7ebced2b-e2f9-45e0-bf75-111111111113"),
-                            MunicipalityId = new Guid("7ebced2b-e2f9-45e0-bf75-111111111100"),
                             ScheduleType = 2,
                             Tax = 0.3m,
+                            TaxEndDate = new DateTime(2016, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TaxStartDate = new DateTime(2016, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -98,13 +104,23 @@ namespace MunicipalityTax.Persistence.Migrations
                             MunicipalityId = new Guid("7ebced2b-e2f9-45e0-bf75-111111111100"),
                             ScheduleType = 3,
                             Tax = 0.4m,
+                            TaxEndDate = new DateTime(2016, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TaxStartDate = new DateTime(2016, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("7ebced2b-e2f9-45e0-bf75-111111111115"),
+                            MunicipalityId = new Guid("7ebced2b-e2f9-45e0-bf75-111111111100"),
+                            ScheduleType = 2,
+                            Tax = 0.5m,
+                            TaxEndDate = new DateTime(2016, 2, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TaxStartDate = new DateTime(2016, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
-            modelBuilder.Entity("MunicipalityTax.Domain.Entities.TaxScheduleEntity", b =>
+            modelBuilder.Entity("MunicipalityTax.Domain.Entities.TaxSchedule", b =>
                 {
-                    b.HasOne("MunicipalityTax.Domain.Entities.MunicipalityEntity", "Municipality")
+                    b.HasOne("MunicipalityTax.Domain.Entities.Municipality", "Municipality")
                         .WithMany("TaxSchedules")
                         .HasForeignKey("MunicipalityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -113,7 +129,7 @@ namespace MunicipalityTax.Persistence.Migrations
                     b.Navigation("Municipality");
                 });
 
-            modelBuilder.Entity("MunicipalityTax.Domain.Entities.MunicipalityEntity", b =>
+            modelBuilder.Entity("MunicipalityTax.Domain.Entities.Municipality", b =>
                 {
                     b.Navigation("TaxSchedules");
                 });

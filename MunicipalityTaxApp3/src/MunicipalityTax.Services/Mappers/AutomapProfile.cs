@@ -25,6 +25,8 @@
 
             this.CreateMap<TaxScheduleDto, TaxSchedule>();
             this.CreateMap<TaxScheduleCreateDto, TaxSchedule>();
+
+            this.CreateMap<TaxScheduleCreateFileDto, TaxScheduleCreateDto>();
         }
     }
 }

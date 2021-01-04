@@ -23,6 +23,13 @@
             this.mService = mService;
         }
 
+        /// <summary>
+        /// Get taxes applied in certain municipality at the given day.
+        /// </summary>
+        /// <param name="request">Request contains municipality name and date.</param>
+        /// <returns>Taxes applied in certain municipality at the given day.</returns>
+        /// <response code="400">If request is wrong.</response>
+        /// <response code="404">If Municipality or tax rate doesn't exist.</response>
         [HttpHead]
         [HttpGet]// GET: api/v1/TaxRates
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -36,18 +43,20 @@
                 return this.BadRequest();
             }
 
-            var municipalityWithName = this.mService.ReadAll().FirstOrDefault(m => m.MunicipalityName == request.MunicipalityName);
+            var municipality = this.mService.ReadAll().FirstOrDefault(m => m.MunicipalityName == request.MunicipalityName);
 
-            if (municipalityWithName == null)
+            if (municipality == null)
             {
-                return this.NotFound("Municipality doesn't exist");
+                return this.NotFound("Municipality doesn't exists");
             }
 
-            var taxRatesDto = this.taxRatesService.ReadMunicipalTaxRatesAtGivenDay(request);
+            var municipalityId = municipality.Id;
+
+            var taxRatesDto = this.taxRatesService.ReadMunicipalTaxRatesAtGivenDay(municipalityId, request);
 
             if (taxRatesDto == Enumerable.Empty<TaxRateDto>())
             {
-                return this.NotFound("Tax rate doesn't exist");
+                return this.NotFound("Tax rate doesn't exists");
             }
 
             return this.Ok(taxRatesDto);

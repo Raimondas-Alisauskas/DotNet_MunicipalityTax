@@ -1,5 +1,6 @@
 ﻿namespace MunicipalityTax.Contracts.In
 {
+    using System;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
@@ -10,15 +11,8 @@
         public string MunicipalityName { get; set; }
 
         [Required]
-        [DefaultValue("2016")]
-        public int Year { get; set; }
-
-        [Required]
-        [DefaultValue("8")]
-        public int Month { get; set; }
-
-        [Required]
-        [DefaultValue("1")]
-        public int Day { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        [DefaultValue("2016-01-01")]
+        public DateTime Date { get; set; }
     }
 }

@@ -1,6 +1,9 @@
 ﻿namespace MunicipalityTax.WebApi.Configurations
 {
+    using System;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.OpenApi.Models;
@@ -14,17 +17,23 @@
 
         public static IServiceCollection AddSwaggerWithConfig(this IServiceCollection services)
         {
-            services.AddSwaggerGen(config =>
+            services.AddSwaggerGen(c =>
             {
-                config.SwaggerDoc(
+                c.SwaggerDoc(
                     ApiVersion,
                     new OpenApiInfo
                     {
                         Title = ApiName,
                         Version = ApiVersion,
+                        Description = "Example of ASP.NET Core Web API which manages taxes applied in different municipalities",
                     });
-                config.OperationFilter<RemoveVersionFromParameter>();
-                config.DocumentFilter<ReplaceVersionWithExactValueInPath>();
+                c.OperationFilter<RemoveVersionFromParameter>();
+                c.DocumentFilter<ReplaceVersionWithExactValueInPath>();
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath, true);
             });
             services.AddSwaggerGenNewtonsoftSupport();
 
@@ -33,16 +42,14 @@
 
         public static IApplicationBuilder UseSwaggerWithOptions(this IApplicationBuilder app)
         {
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger(options =>
+            app.UseSwagger(c =>
             {
-                options.RouteTemplate = "swagger/{documentName}/swagger.json";
+                c.RouteTemplate = "swagger/{documentName}/swagger.json";
             });
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(options =>
+            app.UseSwaggerUI(c =>
             {
-                options.SwaggerEndpoint(SwaggerEndPoint, ApiName + " " + ApiVersion);
+                c.SwaggerEndpoint(SwaggerEndPoint, ApiName + " " + ApiVersion);
 
                 // options.RoutePrefix = string.Empty;
             });

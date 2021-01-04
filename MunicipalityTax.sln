@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
 		InsertData.sql = InsertData.sql
+		MTXTest.csv = MTXTest.csv
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -17,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Persistence
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Services", "MunicipalityTaxApp3\src\MunicipalityTax.Services\MunicipalityTax.Services.csproj", "{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.WebApi", "MunicipalityTaxApp3\src\MunicipalityTax.WebApi\MunicipalityTax.WebApi.csproj", "{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Services.Tests", "MunicipalityTaxApp3\tst\MunicipalityTax.Services.Tests\MunicipalityTax.Services.Tests.csproj", "{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.WebApi.Tests", "MunicipalityTaxApp3\tst\MunicipalityTax.WebApi.Tests\MunicipalityTax.WebApi.Tests.csproj", "{2A7E97F4-883C-424E-B889-D55C7B59F8C2}"
@@ -26,6 +25,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Contracts", "MunicipalityTaxApp3\src\MunicipalityTax.Contracts\MunicipalityTax.Contracts.csproj", "{B7A35CDB-B73F-46DB-A641-CC25F5CABFBA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.Domain", "MunicipalityTaxApp3\src\MunicipalityTax.Domain\MunicipalityTax.Domain.csproj", "{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MunicipalityTax.WebApi", "MunicipalityTaxApp3\src\MunicipalityTax.WebApi\MunicipalityTax.WebApi.csproj", "{27DE8999-A5EF-4E67-B3B4-3398B3916290}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +42,6 @@ Global
 		{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D430C9AC-8069-4E98-9F15-721A7D5C2DAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBEEBD00-7198-4E5C-872E-4A4B3D0AEEDD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64DFBC49-C8BB-4CAF-AB07-EB91C3D6A7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,6 +58,10 @@ Global
 		{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C2D6F3D-F7FE-40DF-BE2B-2EDEBFB91B74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27DE8999-A5EF-4E67-B3B4-3398B3916290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DE8999-A5EF-4E67-B3B4-3398B3916290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DE8999-A5EF-4E67-B3B4-3398B3916290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DE8999-A5EF-4E67-B3B4-3398B3916290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

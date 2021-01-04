@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Dynamic;
     using System.Linq;
-    using System.Linq.Dynamic.Core;
-    using System.Text;
     using AutoMapper;
     using MunicipalityTax.Contracts.In;
     using MunicipalityTax.Domain.Entities;
@@ -31,7 +29,7 @@
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var entities = this.repository.ReadAll() as IQueryable<Municipality>;
+            var entities = this.repository.ReadAll();
 
             if (!string.IsNullOrWhiteSpace(request.MunicipalityName))
             {
@@ -53,28 +51,16 @@
 
             if (!string.IsNullOrWhiteSpace(request.OrderBy))
             {
-                var ordering = new StringBuilder();
                 var orderByArray = request.OrderBy.Split(',');
 
                 foreach (var req in orderByArray)
                 {
                     var trimmedRequest = req.Trim();
-                    var isOrderDescending = trimmedRequest.EndsWith(" desc");
-
-                    var indexOfFirstSpace = trimmedRequest.IndexOf(" ");
-                    var propertyName = indexOfFirstSpace == -1 ?
-                        trimmedRequest : trimmedRequest.Remove(indexOfFirstSpace);
-
-                    ordering
-                        .Append(ordering.Length == 0 ? string.Empty : ", ")
-                        .Append(propertyName)
-                        .Append(isOrderDescending ? " descending" : " ascending");
+                    entities = entities.OrderByProp(trimmedRequest);
                 }
-
-                entities = entities.OrderBy(ordering.ToString());
             }
 
-            var page = entities.Page(request.PageNumber, request.PageSize);
+            var page = PagingHelper<Municipality>.MakePage(entities, request.PageNumber, request.PageSize);
 
             return this.mapper.Map<IEnumerable<MunicipalityDto>>(source: page)
                 .ReturnFieldsOnly(request.Fields);

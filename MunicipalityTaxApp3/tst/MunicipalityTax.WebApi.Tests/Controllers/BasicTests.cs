@@ -18,7 +18,7 @@
         [InlineData("/swagger", "text/html; charset=utf-8")]
         [InlineData("/api/v1/Municipalities", "application/json; charset=utf-8")]
         [InlineData("/api/v1/Municipalities/7ebced2b-e2f9-45e0-bf75-111111111100/TaxSchedules", "application/json; charset=utf-8")]
-        [InlineData("/api/v1/TaxRates?MunicipalityName=TestMunicipality&Year=2016&Month=1&Day=1", "application/json; charset=utf-8")]
+        [InlineData("/api/v1/TaxRates?MunicipalityName=TestMunicipality&Date=2016-01-01", "application/json; charset=utf-8")]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url, string contentType)
         {
             // Arrange

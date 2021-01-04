@@ -10,15 +10,15 @@
     {
         public TaxScheduleCreateDtoValidator()
         {
-            this.RuleFor(x => x.ScheduleType).Must(p => p.GetType().IsEnum).WithMessage("Please provide correct schedule type");
+            this.RuleFor(x => x.ScheduleType).IsInEnum();
 
-            this.RuleFor(x => x.TaxStartDate).NotEmpty().WithMessage("Please provide valid Tax start date");
+            this.RuleFor(x => x.TaxStartDate).NotEmpty();
             this.RuleFor(x => x.TaxStartDate.DayOfWeek)
                 .Equal(DayOfWeek.Monday)
                 .When(x => x.ScheduleType == ScheduleType.Weekly)
                 .WithMessage("Tax start date must be on Monday if Weekly schedule type is chosen");
 
-            this.RuleFor(x => x.Tax).NotEmpty().ScalePrecision(1, 2).WithMessage("Please provide valid Tax value");
+            this.RuleFor(x => x.Tax).NotEmpty().ScalePrecision(1, 2).WithMessage("Please provide valid Tax value (example: 0.1)");
 
             this.RuleFor(x => x.MunicipalityId).NotEmpty().WithMessage("Please provide valid Id value");
 
@@ -27,6 +27,7 @@
                 .Equal(1)
                 .When(x => x.ScheduleType == ScheduleType.Monthly || x.ScheduleType == ScheduleType.Yearly)
                 .WithMessage("Tax start date must be first day of month if Monthly or Yearly schedule type is chosen");
+
             this.RuleFor(x => x.TaxStartDate.Month)
                 .Equal(1)
                 .When(x => x.ScheduleType == ScheduleType.Yearly)
